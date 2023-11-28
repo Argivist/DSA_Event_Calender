@@ -1,4 +1,4 @@
-import java.sql.Date;
+import java.util.Date;
 import java.sql.Time;
 import java.time.LocalTime;
 
@@ -6,7 +6,8 @@ public class Event {
     private String title; // Event Title
     private String description; // Event description
     private LocalTime time; // Event time
-    private Date date; // Event date
+    private int duration;
+    private String date; // Event date
 
     ////// Getters and Setters///////
     //// Getters
@@ -15,7 +16,7 @@ public class Event {
      * 
      * @return the date of the event
      */
-    public Date getDate() {
+    public String getDate() {
         return this.date;
     }
 
@@ -26,6 +27,15 @@ public class Event {
      */
     public LocalTime getTime() {
         return time;
+    }
+
+        /**
+     * Gets the duration of the event
+     * 
+     * @return the time of the event
+     */
+    public int getDur() {
+        return duration;
     }
 
     /**
@@ -61,7 +71,7 @@ public class Event {
      * 
      * @param date_ the new date of the event
      */
-    public void setDate(Date date_) {
+    public void setDate(String date_) {
         this.date = date_;
     }
 
@@ -100,7 +110,7 @@ public class Event {
      * @param title_       the title of the event
      * @param description_ the description of the event
      */
-    public Event(Date date_, LocalTime time_, String title_, String description_) {
+    public Event(String date_, LocalTime time_, String title_, String description_) {
         setDate(date_);
         setTime(time_);
         setDescription(description_);

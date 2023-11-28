@@ -62,6 +62,12 @@ public class Month {
         return name;
     }
 
+    public void getMonth(){
+        for(Day d:days){
+            System.out.println(d.getDate());
+            d.printDayEvents();
+        }
+    }
     /**
      * Returns the number of days in the month.
      * 

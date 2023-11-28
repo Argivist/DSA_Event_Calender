@@ -7,30 +7,32 @@ public class Day {
     private Hashtable<LocalTime, Event> events = new Hashtable<>();
     private PriorityQueue<LocalTime> startTimes = new PriorityQueue<>();
 
-    public boolean addEvent(LocalTime time, int duration, Event e) {
+    public boolean addEvent(Event e) {
+        
+        LocalTime time=e.getTime();
+        int duration=e.getDur();
         int count = duration / 15;
-
-        if (getEvent(time) == null) {
+        if (getEvent(time) != null) {
             return false;
         } else {
             startTimes.add(time);
-            for (int i = 0; i < count; i++) {
+            
                 events.put(time, e);
-
-                time = time.plusMinutes(15);
-            }
+            //    time = time.plusMinutes(15);
+            
             return true;
         }
     }
 
-    public void removeEvent(LocalTime time, int duration, Event e) {
-        int count = duration / 15;
+    public void removeEvent(LocalTime time) {
+        //int duration=getEvent(time).getDur();
+        //int count = duration / 15;
 
-        for (int i = 0; i < count; i++) {
+        
             events.remove(time);
             startTimes.remove(time);
-            time = time.plusMinutes(15);
-        }
+            //time = time.plusMinutes(15);
+        
     }
 
     public Event getEvent(LocalTime t) {
@@ -38,13 +40,19 @@ public class Day {
     }
 
     public Event[] getDayEvents() {
-
-        LocalTime[] pq = (LocalTime[]) startTimes.toArray();
+        Object[] pq = startTimes.toArray();
         Event[] e = new Event[pq.length];
         for (int i = 0; i < pq.length; i++) {
-            e[i] = getEvent(pq[i]);
+            e[i] = getEvent((LocalTime)pq[i]);
         }
         return e;
+    }
+    
+    public void printDayEvents(){
+        Event[] e=getDayEvents();
+        for(Event event: e){
+            System.out.println(event);
+        }
     }
 
     public int getDate(){
@@ -54,14 +62,17 @@ public class Day {
     public Day(int dayNum_){
         this.dayNum=dayNum_;
     }
-    public static void main(String[] args) {
-        Hashtable<LocalTime, String> events = new Hashtable<>();
+    public static void main(String[] args) {    
+        Day d = new Day(1);
+        Event e = new Event("12-03", LocalTime.of(12,0), "Walking", "move to a place");
+        System.out.println(d.addEvent(e));
+        System.out.println(d.getEvent(LocalTime.of(12, 0)));
+        Event e2 = new Event("11-09", LocalTime.of(1,0), "Sweeping", "brooming around");
+        System.out.println(d.addEvent(e2));
+        System.out.println(d.getEvent(LocalTime.of(1, 0)));
 
-        events.put(LocalTime.of(10, 0), "Wake up");
-        events.put(LocalTime.of(10, 15), "Wake up");
-        events.put(LocalTime.of(12, 0), "Go to class");
-
-        System.out.println(events.get(LocalTime.of(10, 0)));
+        d.printDayEvents();
+    
     }
 
 }
