@@ -1,3 +1,4 @@
+import java.time.LocalTime;
 public class Month {
     private int num_days;
     private String name;
@@ -64,8 +65,12 @@ public class Month {
 
     public void getMonth(){
         for(Day d:days){
-            System.out.println(d.getDate());
-            d.printDayEvents();
+            if(d==null){
+                continue;
+            }else{
+                System.out.println(d.getDate());
+                d.printDayEvents();
+            }
         }
     }
     /**
@@ -88,5 +93,31 @@ public class Month {
         setName(name);
         setNumDays(num_days);
         days = new Day[num_days];
+    }
+
+    public static void main(String[] args) {
+        Month m = new Month("January", 31);
+        Day d = new Day(1);
+        Day d1 = new Day(2);
+        Event e = new Event("12-03", LocalTime.of(12,0), "Walking", "move to a place");
+        Event e1 = new Event("9-11", LocalTime.of(2, 30), "Running", "levitating");
+        Event e2 = new Event("3-4", LocalTime.of(3, 30), "Swimming", "swim to a place");
+        Event e3 = new Event("4-5", LocalTime.of(4, 30), "Cycling", "cycle to a place");
+        Event e4 = new Event("5-6", LocalTime.of(5, 30), "Driving", "drive to a place");
+        d.addEvent(e);
+        d.addEvent(e1);
+        d.addEvent(e2);
+        d.addEvent(e3);
+
+        d1.addEvent(e4);
+        d1.addEvent(e3);
+        d1.addEvent(e2);
+        d1.addEvent(e1);
+
+        m.setDay(1, d);
+        m.setDay(2, d1);
+        m.getMonth();
+        
+
     }
 }
