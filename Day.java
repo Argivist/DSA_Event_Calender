@@ -8,6 +8,11 @@ public class Day {
     private PriorityQueue<LocalTime> startTimes = new PriorityQueue<>();
 
 
+    /**
+     * Adds an event to the day.
+     * @param e the event to be added
+     * @return true if the event was added successfully, false otherwise
+     */
     public boolean addEvent(Event e) {
         LocalTime newEventStartTime = e.getStartTime();
         LocalTime newEventEndTime = e.getEndTime();
@@ -29,6 +34,19 @@ public class Day {
         return true;
     }
 
+    /**
+     * Gets the event that starts at the specified time.
+     * @param time the time the event starts
+     * @return the event that starts at the specified time
+     */
+    public Event eventReminder(){
+        return events.get(startTimes.peek());
+    }
+
+    /**
+     * Removes an event from the day.
+     * @param time the time the event starts
+     */
     public void removeEvent(LocalTime time) {
         if (events.containsKey(time)) {
             events.remove(time);
@@ -38,10 +56,19 @@ public class Day {
         }
     }
 
+    /**
+     * Gets the event that starts at the specified time.
+     * @param t the time the event starts
+     * @return the event that starts at the specified time
+     */
     public Event getEvents(LocalTime t) {
         return events.get(t);
     }
 
+    /**
+     * Gets all the events in the day.
+     * @return all the events in the day
+     */
     public Event[] getDayEvents() {
         Object[] pq = startTimes.toArray();
         Event[] e = new Event[pq.length];
@@ -51,6 +78,9 @@ public class Day {
         return e;
     }
     
+    /**
+     * Prints all the events in the day.
+     */
     public void printDayEvents(){
         Event[] e=getDayEvents();
 
@@ -64,22 +94,19 @@ public class Day {
 
     }
 
+    /**
+     * Gets the day number.
+     * @return the day number
+     */
     public int getDate(){
         return dayNum;
     }
 
+    /**
+     * Creates a new day.
+     * @param dayNum_ the day number
+     */
     public Day(int dayNum_){
         this.dayNum=dayNum_;
     }
-    public static void main(String[] args) {    
-        Day d = new Day(1);
-        Event e = new Event(2,"12-03", LocalTime.of(12,0), LocalTime.of(13,0), "Walking", "move to a place");
-        Event e2 = new Event(3,"11-09", LocalTime.of(12,10), LocalTime.of(12,20), "Sweeping", "brooming around");
-
-        System.out.println(d.addEvent(e));
-        System.out.println(d.addEvent(e2));
-
-        d.printDayEvents();
-    }
-
 }

@@ -1,7 +1,6 @@
 import java.time.LocalTime;
 
 public class Event {
-    private int id;
     private String title; // Event Title
     private String description; // The description of the event
     private LocalTime startTime; // The time an event starts
@@ -40,12 +39,6 @@ public class Event {
     public String getDescription() {return description;}
 
     /**
-     * Gets the event id
-     * @return the event id
-     */
-    public int getID() {return id;}
-
-    /**
      * Gets the event details
      * @return the event details
      */
@@ -82,6 +75,7 @@ public class Event {
      */
     public void setDescription(String desc_) {this.description = desc_;}
 
+
     /**
      * Event Constructor
      * 
@@ -90,8 +84,7 @@ public class Event {
      * @param title_       the title of the event
      * @param description_ the description of the event
      */
-    public Event(int id_,String date_, LocalTime startTime_, LocalTime endTime_, String title_, String description_) {
-        this.id=id_;
+    public Event(String date_, LocalTime startTime_, LocalTime endTime_, String title_, String description_) {
         setDate(date_);
         setTitle(title_);
         setStartTime(startTime_);

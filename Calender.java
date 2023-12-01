@@ -6,13 +6,11 @@ import java.time.LocalTime;
  */
 public class Calender {
     int year;
-    Month[] Year = new Month[12];
-    int[] num_days = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+    public Month[] Year = new Month[12];
+    public int[] num_days = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
     String[] months = { "January", "February", "March", "April", "May", "June", "July", "August", "September",
             "October", "November", "December" };
 
-    //// Getters and Setters////
-    /// Setters
 
     /**
      * This method sets the year for the calendar.
@@ -42,7 +40,12 @@ public class Calender {
         return this.year;
     }
 
-    // Adding event to year calender
+    /**
+     * This method gets the month of the calendar.
+     * 
+     * @param month_ The month to be returned.
+     * @return The month of the calendar.
+     */
     public boolean addEvent(Event e) {
         String[] s = e.getDate().split("-");
         if(Year[Integer.parseInt(s[0])-1].getDay(Integer.parseInt(s[1]))==null){
@@ -52,7 +55,13 @@ public class Calender {
         return b;
     }
 
-    // getting events
+    /**
+     * This method gets the event that starts at the specified time.
+     * 
+     * @param date The date of the event.
+     * @param t    The time of the event.
+     * @return The event that starts at the specified time.
+     */
     public Event getEvents(String date, LocalTime t) {
         String[] s = date.split("-");
         if(Year[Integer.parseInt(s[0])-1].getDay(Integer.parseInt(s[1]))==null){
@@ -61,7 +70,13 @@ public class Calender {
         return Year[Integer.parseInt(s[0])-1].getDay(Integer.parseInt(s[1])).getEvents(t);
     }
 
-    // removing event
+    /**
+     * This method removes an event from the calendar.
+     * 
+     * @param date The date of the event to be removed.
+     * @param t    The time of the event to be removed.
+     * @return True if the event was removed, false otherwise.
+     */
     public boolean removeEvent(String date, LocalTime t) {
         String[] s = date.split("-");
         if (getEvents(date, t) == null) {
@@ -72,7 +87,12 @@ public class Calender {
         }
     }
 
-    // getting all events in a day
+    /**
+     * This method gets all the events in a specific day.
+     * 
+     * @param date The date to get the events from.
+     * @return The events in the specified day.
+     */
     public Event[] getAllEvent(String date) {
         String[] s = date.split("-");
         if(Year[Integer.parseInt(s[0])-1].getDay(Integer.parseInt(s[1]))==null){
@@ -81,24 +101,30 @@ public class Calender {
         return Year[Integer.parseInt(s[0])-1].getDay(Integer.parseInt(s[1])).getDayEvents();
     }
 
-    // get all events in month
-    public void getAllEvent(int month) {
-        System.out.println(Year[month].getName());
+    /**
+     * This method gets all the events in a specific month.
+     * 
+     * @param month_ The month to get the events from.
+     */
+    public void getAllEvent(int month_) {
+        System.out.println(Year[month_-1].getName());
         
-        for (Day i : Year[month].getDays()) {
+        for (Day i : Year[month_-1].getDays()) {
             if(i==null){
             System.out.println("no event");
             break;
         }
-            System.out.println("Day"+i.getDate());
+            System.out.println("Day"+(i.getDate()+1));
             i.printDayEvents();
         }
     }
-    //gets all event
+    
+    /**
+     * This method gets all the events in the calendar.
+     */
     public void getAllEvent(){
         for(int i=0;i<12;i++){
-        
-            getAllEvent(i);
+            getAllEvent(i+1);
         }
     }
 
@@ -107,44 +133,8 @@ public class Calender {
      * 
      * @param year_ The year to be set for the calendar.
      */
-
     public Calender(int year_) {
         setYear(year_);
         addMonths();
-    }
-
-
-
-    
-    public static void main(String[] args) {
-        // Create a new calendar for the year 2023
-        Calender calendar = new Calender(2023);
-
-        // Create some events and add them to the calendar
-        Event event1 = new Event(2,"12-03", LocalTime.of(12,0),LocalTime.of(12,0), "Walking", "move to a place");
-        Event event2 = new Event(2,"12-03", LocalTime.of(12,0), LocalTime.of(12,0),"Walking", "move to a place");
-        Event event3 = new Event(2,"12-03", LocalTime.of(12,0), LocalTime.of(12,0),"Walking", "move to a place");
-
-        System.out.println(calendar.addEvent(event1));
-        System.out.println(calendar.addEvent(event2));
-        System.out.println(calendar.addEvent(event3));
-
-        // Retrieve events and print them
-        Event retrievedEvent = calendar.getEvents("05-15", LocalTime.of(10, 30));
-        if (retrievedEvent != null) {
-            System.out.println("Retrieved Event: " + retrievedEvent.getDescription());
-        }
-
-        // Get all events for a specific day and print them
-        Event[] allEvents = calendar.getAllEvent("06-20");
-        if (allEvents != null) {
-            System.out.println("All Events on 2023-06-20:");
-            for (Event e : allEvents) {
-                System.out.println(e.getDescription());
-            }
-        }
-
-        // Print all events in each month
-        calendar.getAllEvent();
     }
 }
