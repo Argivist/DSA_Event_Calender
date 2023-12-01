@@ -1,5 +1,6 @@
 import java.time.LocalTime;
 
+
 /**
  * This class represents a calendar for a specific year.
  */
@@ -44,7 +45,7 @@ public class Calender {
     // Adding event to year calender
     public boolean addEvent(Event e) {
         String[] s = e.getDate().split("-");
-        Boolean b = Year[Integer.parseInt(s[0])].getDay(Integer.parseInt(s[1])).addEvent(e);
+        Boolean b = Year[Integer.parseInt(s[0])-1].getDay(Integer.parseInt(s[1])).addEvent(e);
         return b;
     }
 
@@ -96,5 +97,40 @@ public class Calender {
     public Calender(int year_) {
         setYear(year_);
         addMonths();
+    }
+
+
+
+    
+    public static void main(String[] args) {
+        // Create a new calendar for the year 2023
+        Calender calendar = new Calender(2023);
+
+        // Create some events and add them to the calendar
+        Event event1 = new Event(2,"12-03", LocalTime.of(12,0), "Walking", "move to a place");
+        Event event2 = new Event(2,"12-03", LocalTime.of(12,0), "Walking", "move to a place");
+        Event event3 = new Event(2,"12-03", LocalTime.of(12,0), "Walking", "move to a place");
+
+        calendar.addEvent(event1);
+        calendar.addEvent(event2);
+        calendar.addEvent(event3);
+
+        // Retrieve events and print them
+        Event retrievedEvent = calendar.getEvent("2023-05-15", LocalTime.of(10, 30));
+        if (retrievedEvent != null) {
+            System.out.println("Retrieved Event: " + retrievedEvent.getDescription());
+        }
+
+        // Get all events for a specific day and print them
+        Event[] allEvents = calendar.getAllEvent("2023-06-20");
+        if (allEvents != null) {
+            System.out.println("All Events on 2023-06-20:");
+            for (Event e : allEvents) {
+                System.out.println(e.getDescription());
+            }
+        }
+
+        // Print all events in each month
+        calendar.getAllEvent();
     }
 }
