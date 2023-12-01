@@ -97,7 +97,7 @@ public class Month {
 
     public void addEvent(Event e){
         int date=Integer.parseInt(e.getDate().split("-")[1]);
-        days[date%num_days+1].addEvent(e);
+        days[date].addEvent(e);
     }
     public static void main(String[] args) {
         Month m = new Month("January", 31);
