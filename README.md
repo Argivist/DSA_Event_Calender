@@ -20,20 +20,20 @@ This project aims to create an efficient Event Scheduler and Calendar system usi
 - **Event Reminders:** Utilizes priority queues for managing and triggering reminders (Time Complexity: O(log n)).
 - **Event Conflicts:** Resolves conflicts in schedules employing divide-and-conquer strategies (Time Complexity: O(n log n)).
 - **Event Creation and Modification:** Efficient insertion and modification techniques using hash tables or arrays (Time Complexity: O(1) or O(n)).
-- **Monthly and Daily View:** Algorithms designed to display events for a specific day or month (Time Complexity: O(m) or O(d)).
+- **Monthly and Daily View:** Algorithms designed to display events for a specific day or month (Time Complexity: O(n) or O(1)).
 
 ## Usage
 
 ### Installation
+
 No specific installation is required. Simply download the repository and run the `App.java` code in a compatible environment.
 
-### Contributing
-Feel free to contribute to this project by forking the repository and submitting pull requests with improvements or additional functionalities.
-
 ## Credits
-This project was developed by Group five as part of a Data Structures and Algorithms course or personal project.
+
+This project was developed by Group five as part of a Data Structures and Algorithms course
 
 ## Acknowledgements
-Special thanks to Gideon for their guidance and support during the development of this project.
+
+Special thanks to Gideon for his guidance and support during the development of this project and Dr. Govendha for the Knowledge he passed onto us.
 
 ## Contact
