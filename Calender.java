@@ -50,15 +50,15 @@ public class Calender {
     }
 
     // getting events
-    public Event getEvent(String date, LocalTime t) {
+    public Event getEvents(String date, LocalTime t) {
         String[] s = date.split("-");
-        return Year[Integer.parseInt(s[0])].getDay(Integer.parseInt(s[1])).getEvent(t);
+        return Year[Integer.parseInt(s[0])].getDay(Integer.parseInt(s[1])).getEvents(t);
     }
 
     // removing event
     public boolean removeEvent(String date, LocalTime t) {
         String[] s = date.split("-");
-        if (getEvent(date, t) == null) {
+        if (getEvents(date, t) == null) {
             return false;
         } else {
             Year[Integer.parseInt(s[0])].getDay(Integer.parseInt(s[1])).removeEvent(t);
@@ -107,16 +107,16 @@ public class Calender {
         Calender calendar = new Calender(2023);
 
         // Create some events and add them to the calendar
-        Event event1 = new Event(2,"12-03", LocalTime.of(12,0), "Walking", "move to a place");
-        Event event2 = new Event(2,"12-03", LocalTime.of(12,0), "Walking", "move to a place");
-        Event event3 = new Event(2,"12-03", LocalTime.of(12,0), "Walking", "move to a place");
+        Event event1 = new Event(2,"12-03", LocalTime.of(12,0),LocalTime.of(12,0), "Walking", "move to a place");
+        Event event2 = new Event(2,"12-03", LocalTime.of(12,0), LocalTime.of(12,0),"Walking", "move to a place");
+        Event event3 = new Event(2,"12-03", LocalTime.of(12,0), LocalTime.of(12,0),"Walking", "move to a place");
 
         calendar.addEvent(event1);
         calendar.addEvent(event2);
         calendar.addEvent(event3);
 
         // Retrieve events and print them
-        Event retrievedEvent = calendar.getEvent("2023-05-15", LocalTime.of(10, 30));
+        Event retrievedEvent = calendar.getEvents("2023-05-15", LocalTime.of(10, 30));
         if (retrievedEvent != null) {
             System.out.println("Retrieved Event: " + retrievedEvent.getDescription());
         }
