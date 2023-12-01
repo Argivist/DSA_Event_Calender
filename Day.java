@@ -4,46 +4,44 @@ import java.util.PriorityQueue;
 
 public class Day {
     private int dayNum;
-    private Hashtable<LocalTime, Event> events = new Hashtable<>();
-    private PriorityQueue<LocalTime> startTimes = new PriorityQueue<>();
+    private Hashtable<Integer, Event> events = new Hashtable<>();
+    private PriorityQueue<Integer> ids = new PriorityQueue<>();
 
     public boolean addEvent(Event e) {
+        int id=e.getID();
         
-        LocalTime time=e.getTime();
-        int duration=e.getDur();
-        int count = duration / 15;
-        if (getEvent(time) != null) {
+        if (getEvent(id) != null) {
             return false;
         } else {
-            startTimes.add(time);
+            ids.add(id);
             
-                events.put(time, e);
+                events.put(id, e);
             //    time = time.plusMinutes(15);
             
             return true;
         }
     }
 
-    public void removeEvent(LocalTime time) {
+    public void removeEvent(int id) {
         //int duration=getEvent(time).getDur();
         //int count = duration / 15;
 
         
-            events.remove(time);
-            startTimes.remove(time);
+            events.remove(id);
+            ids.remove(id);
             //time = time.plusMinutes(15);
         
     }
 
-    public Event getEvent(LocalTime t) {
-        return events.get(t);
+    public Event getEvent(int i) {
+        return events.get(i);
     }
 
     public Event[] getDayEvents() {
-        Object[] pq = startTimes.toArray();
+        Object[] pq = ids.toArray();
         Event[] e = new Event[pq.length];
         for (int i = 0; i < pq.length; i++) {
-            e[i] = getEvent((LocalTime)pq[i]);
+            e[i] = getEvent((int)pq[i]);
         }
         return e;
     }
@@ -64,12 +62,12 @@ public class Day {
     }
     public static void main(String[] args) {    
         Day d = new Day(1);
-        Event e = new Event("12-03", LocalTime.of(12,0), "Walking", "move to a place");
+        Event e = new Event(12,"12-03", LocalTime.of(12,0), "Walking", "move to a place");
         System.out.println(d.addEvent(e));
-        System.out.println(d.getEvent(LocalTime.of(12, 0)));
-        Event e2 = new Event("11-09", LocalTime.of(1,0), "Sweeping", "brooming around");
+        System.out.println(d.getEvent(12));
+        Event e2 = new Event(2,"11-09", LocalTime.of(1,0), "Sweeping", "brooming around");
         System.out.println(d.addEvent(e2));
-        System.out.println(d.getEvent(LocalTime.of(1, 0)));
+        System.out.println(d.getEvent(2));
 
         d.printDayEvents();
     

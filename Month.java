@@ -63,7 +63,7 @@ public class Month {
         return name;
     }
 
-    public void getMonth(){
+    public void getMonthView(){
         for(Day d:days){
             if(d==null){
                 continue;
@@ -95,15 +95,19 @@ public class Month {
         days = new Day[num_days];
     }
 
+    public void addEvent(Event e){
+        int date=Integer.parseInt(e.getDate().split("-")[1]);
+        days[date%num_days+1].addEvent(e);
+    }
     public static void main(String[] args) {
         Month m = new Month("January", 31);
         Day d = new Day(1);
         Day d1 = new Day(2);
-        Event e = new Event("12-03", LocalTime.of(12,0), "Walking", "move to a place");
-        Event e1 = new Event("9-11", LocalTime.of(2, 30), "Running", "levitating");
-        Event e2 = new Event("3-4", LocalTime.of(3, 30), "Swimming", "swim to a place");
-        Event e3 = new Event("4-5", LocalTime.of(4, 30), "Cycling", "cycle to a place");
-        Event e4 = new Event("5-6", LocalTime.of(5, 30), "Driving", "drive to a place");
+        Event e = new Event(1,"12-03", LocalTime.of(12,0), "Walking", "move to a place");
+        Event e1 = new Event(2,"9-11", LocalTime.of(2, 30), "Running", "levitating");
+        Event e2 = new Event(3,"3-4", LocalTime.of(3, 30), "Swimming", "swim to a place");
+        Event e3 = new Event(4,"4-5", LocalTime.of(4, 30), "Cycling", "cycle to a place");
+        Event e4 = new Event(5,"5-6", LocalTime.of(5, 30), "Driving", "drive to a place");
         d.addEvent(e);
         d.addEvent(e1);
         d.addEvent(e2);
@@ -116,7 +120,7 @@ public class Month {
 
         m.setDay(1, d);
         m.setDay(2, d1);
-        m.getMonth();
+        m.getMonthView();
         
 
     }

@@ -1,8 +1,7 @@
-import java.util.Date;
-import java.sql.Time;
 import java.time.LocalTime;
 
 public class Event {
+    private int id;
     private String title; // Event Title
     private String description; // Event description
     private LocalTime time; // Event time
@@ -54,6 +53,15 @@ public class Event {
      */
     public String getDescription() {
         return description;
+    }
+
+    /**
+     * Gets the event id
+     * 
+     * @return the event id
+     */
+    public int getID() {
+        return id;
     }
 
     /**
@@ -110,7 +118,8 @@ public class Event {
      * @param title_       the title of the event
      * @param description_ the description of the event
      */
-    public Event(String date_, LocalTime time_, String title_, String description_) {
+    public Event(int id_,String date_, LocalTime time_, String title_, String description_) {
+        this.id=id_;
         setDate(date_);
         setTime(time_);
         setDescription(description_);
