@@ -1,3 +1,5 @@
+import java.time.LocalTime;
+
 /**
  * This class represents a calendar for a specific year.
  */
@@ -39,11 +41,58 @@ public class Calender {
         return this.year;
     }
 
+    // Adding event to year calender
+    public boolean addEvent(Event e) {
+        String[] s = e.getDate().split("-");
+        Boolean b = Year[Integer.parseInt(s[0])].getDay(Integer.parseInt(s[1])).addEvent(e);
+        return b;
+    }
+
+    // getting events
+    public Event getEvent(String date, LocalTime t) {
+        String[] s = date.split("-");
+        return Year[Integer.parseInt(s[0])].getDay(Integer.parseInt(s[1])).getEvent(t);
+    }
+
+    // removing event
+    public boolean removeEvent(String date, LocalTime t) {
+        String[] s = date.split("-");
+        if (getEvent(date, t) == null) {
+            return false;
+        } else {
+            Year[Integer.parseInt(s[0])].getDay(Integer.parseInt(s[1])).removeEvent(t);
+            return true;
+        }
+    }
+
+    // getting all events in a day
+    public Event[] getAllEvent(String date) {
+        String[] s = date.split("-");
+        return Year[Integer.parseInt(s[0])].getDay(Integer.parseInt(s[1])).getDayEvents();
+    }
+
+    // get all events in month
+    public void getAllEvent(int month) {
+        System.out.println(Year[month].getName());
+        for (Day i : Year[month].getDays()) {
+            System.out.println("Day"+i.getDate());
+            i.printDayEvents();
+        }
+    }
+    //gets all event
+    public void getAllEvent(){
+        for(int i=0;i<12;i++){
+            System.out.println(months[i]);
+            getAllEvent(i);
+        }
+    }
+
     /**
      * This is the constructor for the Calender class.
      * 
      * @param year_ The year to be set for the calendar.
      */
+
     public Calender(int year_) {
         setYear(year_);
         addMonths();

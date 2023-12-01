@@ -49,6 +49,9 @@ public class Day {
     
     public void printDayEvents(){
         Event[] e=getDayEvents();
+        if(e.length==0){
+            return null;
+        }
         for(Event event: e){
             System.out.println(event);
         }

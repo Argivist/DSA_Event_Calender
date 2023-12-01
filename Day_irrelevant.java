@@ -3,7 +3,7 @@ import java.util.Hashtable;
 import java.time.LocalTime;
 import java.util.PriorityQueue;
 
-public class Day {
+public class Day__ {
     private int dayNum;
     private Hashtable<Integer, Event> events = new Hashtable<>();
     private PriorityQueue<LocalTime> timequeue = new PriorityQueue<>();

@@ -68,7 +68,7 @@ public class Month {
             if(d==null){
                 continue;
             }else{
-                System.out.println(d.getDate());
+                System.out.println("Day"+d.getDate());
                 d.printDayEvents();
             }
         }
