@@ -28,9 +28,10 @@ public class Day {
         //int duration=getEvent(time).getDur();
         //int count = duration / 15;
 
-        
+            Event e=events.get(id);
             events.remove(id);
-            ids.remove(id);
+            timequeue.remove(e.getTime());
+            id_dict.remove(e.getTime());
             //time = time.plusMinutes(15);
         
     }
@@ -40,10 +41,10 @@ public class Day {
     }
 
     public Event[] getDayEvents() {
-        Object[] pq = ids.toArray();
+        Object[] pq = timequeue.toArray();
         Event[] e = new Event[pq.length];
         for (int i = 0; i < pq.length; i++) {
-            e[i] = getEvent((int)pq[i]);
+            e[i] = getEvent((int) id_dict.get(pq[i]));
         }
         return e;
     }
@@ -70,6 +71,7 @@ public class Day {
         Event e2 = new Event(2,"11-09", LocalTime.of(1,0), "Sweeping", "brooming around");
         System.out.println(d.addEvent(e2));
         System.out.println(d.getEvent(2));
+        System.out.println(d.getDayEvents());
 
         d.printDayEvents();
     
