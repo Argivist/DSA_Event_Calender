@@ -1,3 +1,4 @@
+import java.util.Dictionary;
 import java.util.Hashtable;
 import java.time.LocalTime;
 import java.util.PriorityQueue;
@@ -5,17 +6,18 @@ import java.util.PriorityQueue;
 public class Day {
     private int dayNum;
     private Hashtable<Integer, Event> events = new Hashtable<>();
-    private PriorityQueue<Integer> ids = new PriorityQueue<>();
+    private PriorityQueue<LocalTime> timequeue = new PriorityQueue<>();
+    private Dictionary<LocalTime,Integer> id_dict=new Hashtable<>();
 
     public boolean addEvent(Event e) {
         int id=e.getID();
-        
+        LocalTime time=e.getTime();
         if (getEvent(id) != null) {
             return false;
         } else {
-            ids.add(id);
-            
+            id_dict.put(time,id);            
                 events.put(id, e);
+                timequeue.add(time);
             //    time = time.plusMinutes(15);
             
             return true;
