@@ -45,6 +45,9 @@ public class Calender {
     // Adding event to year calender
     public boolean addEvent(Event e) {
         String[] s = e.getDate().split("-");
+        if(Year[Integer.parseInt(s[0])-1].getDay(Integer.parseInt(s[1]))==null){
+            return false;
+        }
         Boolean b = Year[Integer.parseInt(s[0])-1].getDay(Integer.parseInt(s[1])).addEvent(e);
         return b;
     }
@@ -52,6 +55,9 @@ public class Calender {
     // getting events
     public Event getEvents(String date, LocalTime t) {
         String[] s = date.split("-");
+        if(Year[Integer.parseInt(s[0])-1].getDay(Integer.parseInt(s[1]))==null){
+            return null;
+        }
         return Year[Integer.parseInt(s[0])].getDay(Integer.parseInt(s[1])).getEvents(t);
     }
 
@@ -69,13 +75,21 @@ public class Calender {
     // getting all events in a day
     public Event[] getAllEvent(String date) {
         String[] s = date.split("-");
+        if(Year[Integer.parseInt(s[0])-1].getDay(Integer.parseInt(s[1]))==null){
+            return null;
+        }
         return Year[Integer.parseInt(s[0])].getDay(Integer.parseInt(s[1])).getDayEvents();
     }
 
     // get all events in month
     public void getAllEvent(int month) {
         System.out.println(Year[month].getName());
+        
         for (Day i : Year[month].getDays()) {
+            if(i==null){
+            System.out.println("no event");
+            break;
+        }
             System.out.println("Day"+i.getDate());
             i.printDayEvents();
         }
@@ -116,13 +130,13 @@ public class Calender {
         calendar.addEvent(event3);
 
         // Retrieve events and print them
-        Event retrievedEvent = calendar.getEvents("2023-05-15", LocalTime.of(10, 30));
+        Event retrievedEvent = calendar.getEvents("05-15", LocalTime.of(10, 30));
         if (retrievedEvent != null) {
             System.out.println("Retrieved Event: " + retrievedEvent.getDescription());
         }
 
         // Get all events for a specific day and print them
-        Event[] allEvents = calendar.getAllEvent("2023-06-20");
+        Event[] allEvents = calendar.getAllEvent("06-20");
         if (allEvents != null) {
             System.out.println("All Events on 2023-06-20:");
             for (Event e : allEvents) {
