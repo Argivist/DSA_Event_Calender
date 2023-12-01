@@ -93,6 +93,9 @@ public class Month {
         setName(name);
         setNumDays(num_days);
         days = new Day[num_days];
+        for(int i=0;i<num_days;i++){
+            days[i]=new Day(i);
+        }    
     }
 
     public void addEvent(Event e){

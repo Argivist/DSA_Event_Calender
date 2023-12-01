@@ -58,7 +58,7 @@ public class Calender {
         if(Year[Integer.parseInt(s[0])-1].getDay(Integer.parseInt(s[1]))==null){
             return null;
         }
-        return Year[Integer.parseInt(s[0])].getDay(Integer.parseInt(s[1])).getEvents(t);
+        return Year[Integer.parseInt(s[0])-1].getDay(Integer.parseInt(s[1])).getEvents(t);
     }
 
     // removing event
@@ -67,7 +67,7 @@ public class Calender {
         if (getEvents(date, t) == null) {
             return false;
         } else {
-            Year[Integer.parseInt(s[0])].getDay(Integer.parseInt(s[1])).removeEvent(t);
+            Year[Integer.parseInt(s[0])-1].getDay(Integer.parseInt(s[1])).removeEvent(t);
             return true;
         }
     }
@@ -78,7 +78,7 @@ public class Calender {
         if(Year[Integer.parseInt(s[0])-1].getDay(Integer.parseInt(s[1]))==null){
             return null;
         }
-        return Year[Integer.parseInt(s[0])].getDay(Integer.parseInt(s[1])).getDayEvents();
+        return Year[Integer.parseInt(s[0])-1].getDay(Integer.parseInt(s[1])).getDayEvents();
     }
 
     // get all events in month
@@ -97,7 +97,7 @@ public class Calender {
     //gets all event
     public void getAllEvent(){
         for(int i=0;i<12;i++){
-            System.out.println(months[i]);
+        
             getAllEvent(i);
         }
     }
@@ -125,9 +125,9 @@ public class Calender {
         Event event2 = new Event(2,"12-03", LocalTime.of(12,0), LocalTime.of(12,0),"Walking", "move to a place");
         Event event3 = new Event(2,"12-03", LocalTime.of(12,0), LocalTime.of(12,0),"Walking", "move to a place");
 
-        calendar.addEvent(event1);
-        calendar.addEvent(event2);
-        calendar.addEvent(event3);
+        System.out.println(calendar.addEvent(event1));
+        System.out.println(calendar.addEvent(event2));
+        System.out.println(calendar.addEvent(event3));
 
         // Retrieve events and print them
         Event retrievedEvent = calendar.getEvents("05-15", LocalTime.of(10, 30));
